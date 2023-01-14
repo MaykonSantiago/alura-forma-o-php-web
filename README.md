@@ -1,2 +1,2 @@
-# alura-formacao-php-web
-Projeto feito durante o curso da Alura, formação em PHP Web
+# Formação em PHP Web - Alura
+Projeto feito durante o curso da Alura, formação em PHP Web.
