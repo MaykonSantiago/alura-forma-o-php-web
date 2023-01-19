@@ -6,13 +6,13 @@
     $action = '/novo-video.php';
 
     if($id !== 0) {
-    $query = 'SELECT * FROM videos WHERE id = ?';
+        $query = 'SELECT * FROM videos WHERE id = ?';
 
-    $stmt = $pdo->prepare($query);
-    $stmt->bindValue(1, $id, PDO::PARAM_INT);
-    $stmt->execute();
-    $video = $stmt->fetch(PDO::FETCH_ASSOC);
-    $action = "/editar-video.php?id=$id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindValue(1, $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $video = $stmt->fetch(PDO::FETCH_ASSOC);
+        $action = "/editar-video.php?id=$id";
     }
 ?><!DOCTYPE html>
 <html lang="pt-br">
@@ -34,7 +34,7 @@
     <!-- Cabecalho -->
     <header>
         <nav class="cabecalho">
-            <a class="logo" href="../index.php"></a>
+            <a class="logo" href="../"></a>
 
             <div class="cabecalho__icones">
                 <a href="/enviar-video.html" class="cabecalho__videos"></a>
@@ -71,7 +71,7 @@
                         class="campo__escrita"
                         required
                         <?php if ($action == '/novo-video.php'): ?>
-                            placeholder="Por exemplo: https://www.youtube.com/embed/FAY1K2aUg5g" id='url'
+                            placeholder="Neste campo, dê o nome do vídeo" id='url'
                         <?php elseif ($action == "/editar-video.php?id=$id" ): ?>
                             value="<?= $video['title']; ?>"
                         <?php endif; ?>
