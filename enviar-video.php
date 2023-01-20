@@ -3,7 +3,7 @@
     $pdo = new PDO("sqlite:$dbPath");
 
     $id = intval(filter_input(INPUT_GET, 'id'));
-    $action = '/novo-video.php';
+    $action = '/novo-video';
 
     if($id !== 0) {
         $query = 'SELECT * FROM videos WHERE id = ?';
@@ -12,7 +12,7 @@
         $stmt->bindValue(1, $id, PDO::PARAM_INT);
         $stmt->execute();
         $video = $stmt->fetch(PDO::FETCH_ASSOC);
-        $action = "/editar-video.php?id=$id";
+        $action = "/editar-video?id=$id";
     }
 ?>
 <?php require_once 'inicio-html.php' ?>
@@ -26,7 +26,7 @@
                         name="url" 
                         class="campo__escrita" 
                         required
-                        <?php if($action == '/novo-video.php'): ?>
+                        <?php if($action == __DIR__ . '/novo-video.php'): ?>
                             placeholder="Por exemplo: https://www.youtube.com/embed/FAY1K2aUg5g" id='url'
                         <?php else: ?>
                             value="<?= $video['url']; ?>"
@@ -42,9 +42,9 @@
                         name="titulo"
                         class="campo__escrita"
                         required
-                        <?php if ($action == '/novo-video.php'): ?>
+                        <?php if ($action == __DIR__ . '/novo-video.php'): ?>
                             placeholder="Neste campo, dê o nome do vídeo" id='url'
-                        <?php elseif ($action == "/editar-video.php?id=$id" ): ?>
+                        <?php else: ?>
                             value="<?= $video['title']; ?>"
                         <?php endif; ?>
                         id='titulo'

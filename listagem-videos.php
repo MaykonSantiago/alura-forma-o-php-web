@@ -17,7 +17,7 @@
                     <img src="./img/logo.png" alt="logo canal alura">
                     <h3><?= $video['title']?></h3>
                     <div class="acoes-video">
-                        <a href="/novo-video?id=<?= $video['id']; ?>">Editar</a>
+                        <a href="/editar-video?id=<?= $video['id']; ?>">Editar</a>
                         <a href="/remover-video?id=<?= $video['id']; ?>">Excluir</a>
                     </div>
                 </div>
