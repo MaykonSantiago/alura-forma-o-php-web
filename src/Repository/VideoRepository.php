@@ -10,7 +10,6 @@ class VideoRepository
 {
     public function __construct(private PDO $pdo)
     {
-        
     }
 
     public function add(Video $video): bool
@@ -21,7 +20,7 @@ class VideoRepository
         $stmt->bindValue(2, $video->title);
 
         $resultado = $stmt->execute();
-        if($resultado === false){
+        if ($resultado === false) {
             throw new Exception('Erro ao salvar o vídeo');
         }
 
@@ -32,7 +31,7 @@ class VideoRepository
         return $resultado;
     }
 
-    public function remove (int $id): bool
+    public function remove(int $id): bool
     {
         $query = "DELETE FROM videos WHERE id = :id";
         $stmt = $this->pdo->prepare($query);
@@ -59,11 +58,27 @@ class VideoRepository
             ->fetchAll(\PDO::FETCH_ASSOC);
 
         return array_map(
-            function (array $videoData) {
-                $video = new Video($videoData['url'], $videoData['title']);
-                $video->setId($videoData['id']);
-                return $video;
-            }, $videoList
+            $this->hydrateVideo(...),
+            $videoList
         );
+    }
+
+    public function findById(int $id): Video
+    {
+        $query = 'SELECT * FROM videos WHERE id = ?';
+
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(1, $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $video = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $this->hydrateVideo($video);
+    }
+
+    public function hydrateVideo(array $videoData): Video
+    {
+        $video = new Video($videoData['url'], $videoData['title']);
+        $video->setId($videoData['id']);
+        return $video;
     }
 }
