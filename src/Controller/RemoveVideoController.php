@@ -4,13 +4,13 @@ namespace Alura\Mvc\Controller;
 
 use Alura\Mvc\Repository\VideoRepository;
 
-class RemoveVideoController
+class RemoveVideoController implements Controller
 {
     public function __construct(private VideoRepository $repository)
     {
     }
 
-    public function processarRequisicao()
+    public function processarRequisicao(): void
     {
         $id = $_GET['id'];
 

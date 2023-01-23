@@ -5,13 +5,13 @@ namespace Alura\Mvc\Controller;
 use Alura\Mvc\Entity\Video;
 use Alura\Mvc\Repository\VideoRepository;
 
-class UpdateVideoController
+class UpdateVideoController implements Controller
 {
     public function __construct(private VideoRepository $repository)
     {
     }
 
-    public function processarRequisicao()
+    public function processarRequisicao(): void
     {
         $url = filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL);
         $title = filter_input(INPUT_POST, 'titulo');

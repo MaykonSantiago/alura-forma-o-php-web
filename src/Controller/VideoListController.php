@@ -4,13 +4,13 @@ namespace Alura\Mvc\Controller;
 
 use Alura\Mvc\Repository\VideoRepository;
 
-class VideoListController
+class VideoListController implements Controller
 {
     public function __construct(private VideoRepository $repository)
     {
     }
 
-    public function processarRequisicao()
+    public function processarRequisicao(): void
     {
         $videosList = $this->repository->all();
         $success =  '';
