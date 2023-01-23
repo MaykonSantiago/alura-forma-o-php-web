@@ -26,7 +26,7 @@
                         name="url" 
                         class="campo__escrita" 
                         required
-                        <?php if($action == __DIR__ . '/novo-video.php'): ?>
+                        <?php if($action === '/novo-video'): ?>
                             placeholder="Por exemplo: https://www.youtube.com/embed/FAY1K2aUg5g" id='url'
                         <?php else: ?>
                             value="<?= $video['url']; ?>"
@@ -42,7 +42,7 @@
                         name="titulo"
                         class="campo__escrita"
                         required
-                        <?php if ($action == __DIR__ . '/novo-video.php'): ?>
+                        <?php if ($action === '/novo-video'): ?>
                             placeholder="Neste campo, dê o nome do vídeo" id='url'
                         <?php else: ?>
                             value="<?= $video['title']; ?>"
