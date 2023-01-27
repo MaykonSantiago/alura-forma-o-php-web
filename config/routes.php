@@ -6,7 +6,6 @@ use Alura\Mvc\Controller\{
     SendVideoController,
     UpdateVideoController,
     VideoListController,
-
 };
 
 return [

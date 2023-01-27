@@ -12,7 +12,7 @@ use Alura\Mvc\Controller\{
 use Alura\Mvc\Repository\VideoRepository;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-$routes = require_once __DIR__ .'/../config/routes.php';
+$routes = require_once __DIR__ . '/../config/routes.php';
 
 $dbPath = __DIR__ . '/../banco.sqlite';
 $pdo = new PDO("sqlite:$dbPath");
@@ -23,7 +23,7 @@ $path = $_SERVER['PATH_INFO'] ?? '/';
 
 $key = "$httpMethod|$path";
 
-if (array_key_exists($key, $routes)){ 
+if (array_key_exists($key, $routes)) {
     $controllerClass = $routes[$key];
     $controller = new $controllerClass($repository);
 } else {
