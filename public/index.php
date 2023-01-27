@@ -12,43 +12,22 @@ use Alura\Mvc\Controller\{
 use Alura\Mvc\Repository\VideoRepository;
 
 require_once __DIR__ . '/../vendor/autoload.php';
+$routes = require_once __DIR__ .'/../config/routes.php';
 
 $dbPath = __DIR__ . '/../banco.sqlite';
 $pdo = new PDO("sqlite:$dbPath");
 $repository = new VideoRepository($pdo);
 
-if (!array_key_exists('PATH_INFO', $_SERVER) || $_SERVER['PATH_INFO'] === '/') {
+$httpMethod = $_SERVER['REQUEST_METHOD'];
+$path = $_SERVER['PATH_INFO'] ?? '/';
 
-    $controller = new VideoListController($repository);
-    
-    
-} elseif ($_SERVER['PATH_INFO'] === '/novo-video') {
+$key = "$httpMethod|$path";
 
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        
-        $controller = new SendVideoController($repository);
-
-    } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        $controller = new NewVideoController($repository);
-
-    }
-} elseif ($_SERVER['PATH_INFO'] === '/editar-video') {
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-
-        $controller = new SendVideoController($repository);
-
-    } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
-        $controller = new UpdateVideoController($repository);
-    }
-} elseif ($_SERVER['PATH_INFO'] === '/remover-video') {
-    
-    $controller = new RemoveVideoController($repository);
-
+if (array_key_exists($key, $routes)){ 
+    $controllerClass = $routes[$key];
+    $controller = new $controllerClass($repository);
 } else {
     $controller = new Error404Controller();
 }
 
-/** @var Controller $controller */
 $controller->processarRequisicao();
