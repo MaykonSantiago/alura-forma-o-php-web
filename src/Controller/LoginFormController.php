@@ -6,6 +6,11 @@ class LoginFormController implements Controller
 {
     public function processarRequisicao(): void
     {
-           require_once __DIR__ . '/../../view/login-form.php';
+        session_start();
+        if ($_SESSION['logado'] === true){
+            header('Location: /');
+            return;
+        }
+        require_once __DIR__ . '/../../view/login-form.php';
     }
 }
