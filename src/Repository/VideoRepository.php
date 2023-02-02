@@ -14,11 +14,12 @@ class VideoRepository
 
     public function add(Video $video): bool
     {
-        $query = 'INSERT INTO videos (url, title) VALUES (:url, :title)';
+        $query = 'INSERT INTO videos (url, title, image_path) VALUES (:url, :title, :image_path)';
         $stmt = $this->pdo->prepare($query);
-        $stmt->bindValue(1, $video->url);
-        $stmt->bindValue(2, $video->title);
-
+        $stmt->bindValue(':url', $video->url);
+        $stmt->bindValue(':title', $video->title);
+        $stmt->bindValue(':image_path', $video->getImagePath());
+        
         $resultado = $stmt->execute();
         if ($resultado === false) {
             throw new Exception('Erro ao salvar o vídeo');

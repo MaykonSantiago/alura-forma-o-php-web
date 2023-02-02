@@ -16,12 +16,23 @@ class NewVideoController implements Controller
         $url   = filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL);
         $title = filter_input(INPUT_POST, 'titulo');
 
+        $video = new Video($url, $title);
+
         if ($url === false || $title === false) {
             header('Location: /?success=0');
             exit();
         }
 
-        if ($this->repository->add(new Video($url, $title)) === false) {
+        if($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+
+            move_uploaded_file(
+                $_FILES['image']['tmp_name'],
+                __DIR__ . '/../../public/img/uploads/' . $_FILES['image']['name']
+            );
+            $video->setImagePath($_FILES['image']['name']);
+        }
+        
+        if ($this->repository->add($video)) {
             header('Location: /?success=0');
         } else {
             header('Location: /?success=1');
