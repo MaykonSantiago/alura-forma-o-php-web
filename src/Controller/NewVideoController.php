@@ -24,12 +24,17 @@ class NewVideoController implements Controller
         }
 
         if($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $fInfo = new \finfo(FILEINFO_MIME_TYPE);
+            $mimeType = $fInfo->file($_FILES['image']['tmp_name']);
 
-            move_uploaded_file(
-                $_FILES['image']['tmp_name'],
-                __DIR__ . '/../../public/img/uploads/' . $_FILES['image']['name']
-            );
-            $video->setImagePath($_FILES['image']['name']);
+            if (str_starts_with($mimeType, 'image/')) {
+                $safeFileName = uniqid('upload_') . '_' . pathinfo($_FILES['image']['name'], PATHINFO_BASENAME);
+                move_uploaded_file(
+                    $_FILES['image']['tmp_name'],
+                    __DIR__ . '/../../public/img/uploads/' . $_FILES['image']['name']
+                );
+                $video->setImagePath($safeFileName);
+            }
         }
         
         if ($this->repository->add($video)) {

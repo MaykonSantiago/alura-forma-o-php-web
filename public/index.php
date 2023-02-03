@@ -16,6 +16,8 @@ $httpMethod = $_SERVER['REQUEST_METHOD'];
 $path = $_SERVER['PATH_INFO'] ?? '/';
 
 session_start();
+session_regenerate_id();
+
 $isLogginRoute = $path=== '/login';
 
 if (!array_key_exists('logado', $_SESSION) && !$isLogginRoute) {
