@@ -5,7 +5,7 @@ namespace Alura\Mvc\Controller;
 use Alura\Mvc\Repository\VideoRepository;
 use PDO;
 
-class SendVideoController implements Controller
+class SendVideoController extends ControllerWithHtml implements Controller
 {
     public function __construct(private VideoRepository $repository)
     {      
@@ -20,6 +20,9 @@ class SendVideoController implements Controller
             $video = $this->repository->findById($id);
         }
 
-        require_once __DIR__ . '/../../view/video-send.php';
+        echo $this->renderTemplate(
+            'video-send',
+            ['video' => $video],
+        );
     }
 }
