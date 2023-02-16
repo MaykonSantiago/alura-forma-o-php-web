@@ -2,22 +2,42 @@
 
 namespace Alura\Mvc\Controller;
 
+use Alura\Mvc\Helper\FlashMessageTrait;
 use Alura\Mvc\Repository\VideoRepository;
+use Nyholm\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class RemoveVideoController implements Controller
 {
+    use FlashMessageTrait;
+
     public function __construct(private VideoRepository $repository)
     {
     }
 
-    public function processarRequisicao(): void
+    public function processarRequisicao(ServerRequestInterface $request): ResponseInterface
     {
-        $id = $_GET['id'];
+        $queryParams = $request->getQueryParams();
+        $id = filter_var($queryParams['id'], FILTER_VALIDATE_INT);
+
+        if ($id === null || $id === false) {
+
+            $this->addErrorMessage('ID inválido');
+            return new Response(302, [
+                'Location' => '/'
+            ]);
+        }
 
         if ($this->repository->remove($id) === false) {
-            header('Location: /?success=0');
+            $this->addErrorMessage('Erro ao remover vídeo');
+            return new Response(302, [
+                'Location' => '/'
+            ]);
         } else {
-            header('Location: /?success=1');
+            return new Response(302, [
+                'Location' => '/'
+            ]);
         }
     }
 }

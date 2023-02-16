@@ -4,6 +4,9 @@ namespace Alura\Mvc\Controller;
 
 use Alura\Mvc\Entity\Video;
 use Alura\Mvc\Repository\VideoRepository;
+use Nyholm\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class UpdateVideoController implements Controller
 {
@@ -11,11 +14,14 @@ class UpdateVideoController implements Controller
     {
     }
 
-    public function processarRequisicao(): void
+    public function processarRequisicao(ServerRequestInterface $request): ResponseInterface
     {
-        $url = filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL);
-        $title = filter_input(INPUT_POST, 'titulo');
-        $id = filter_input(INPUT_GET, 'id');
+        $body        = $request->getParsedBody();
+        $queryParams = $request->getQueryParams();
+
+        $url = filter_var($body['url'], FILTER_VALIDATE_URL);
+        $title = filter_var($body['titulo']);
+        $id = filter_var($queryParams['id']);
 
         $video = new Video($url, $title);
         $video->setId($id);
@@ -36,9 +42,13 @@ class UpdateVideoController implements Controller
         }
 
         if ($this->repository->update($video) === false) {
-            header('Location: /?success=0');
+            return new Response(302, [
+                'Location' => '/?success=0'
+            ]);
         } else {
-            header('Location: /?success=1');
+            return new Response(302, [
+                'Location' => '/?success=1'
+            ]);
         }
     }
 }
