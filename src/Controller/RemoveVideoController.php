@@ -7,8 +7,9 @@ use Alura\Mvc\Repository\VideoRepository;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
-class RemoveVideoController implements Controller
+class RemoveVideoController implements RequestHandlerInterface
 {
     use FlashMessageTrait;
 
@@ -16,7 +17,7 @@ class RemoveVideoController implements Controller
     {
     }
 
-    public function processarRequisicao(ServerRequestInterface $request): ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $queryParams = $request->getQueryParams();
         $id = filter_var($queryParams['id'], FILTER_VALIDATE_INT);

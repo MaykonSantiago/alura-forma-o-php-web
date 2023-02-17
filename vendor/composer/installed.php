@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '041bfd4a7b7c3268b884aa4dc95d19f1ea036f0c',
+        'reference' => '27e6d250daec26039cb1545eb6d49a6e8172d635',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '041bfd4a7b7c3268b884aa4dc95d19f1ea036f0c',
+            'reference' => '27e6d250daec26039cb1545eb6d49a6e8172d635',
             'dev_requirement' => false,
         ),
         'nyholm/psr7' => array(
@@ -26,6 +26,15 @@
             'install_path' => __DIR__ . '/../nyholm/psr7',
             'aliases' => array(),
             'reference' => 'f734364e38a876a23be4d906a2a089e1315be18a',
+            'dev_requirement' => false,
+        ),
+        'nyholm/psr7-server' => array(
+            'pretty_version' => '1.0.2',
+            'version' => '1.0.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../nyholm/psr7-server',
+            'aliases' => array(),
+            'reference' => 'b846a689844cef114e8079d8c80f0afd96745ae3',
             'dev_requirement' => false,
         ),
         'php-http/message-factory' => array(
@@ -66,6 +75,15 @@
             'provided' => array(
                 0 => '1.0',
             ),
+        ),
+        'psr/http-server-handler' => array(
+            'pretty_version' => '1.0.1',
+            'version' => '1.0.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/http-server-handler',
+            'aliases' => array(),
+            'reference' => 'aff2f80e33b7f026ec96bb42f63242dc50ffcae7',
+            'dev_requirement' => false,
         ),
     ),
 );

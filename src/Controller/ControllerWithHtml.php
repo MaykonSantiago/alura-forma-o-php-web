@@ -2,7 +2,9 @@
 
 namespace Alura\Mvc\Controller;
 
-abstract class ControllerWithHtml implements Controller
+use Psr\Http\Server\RequestHandlerInterface;
+
+abstract class ControllerWithHtml implements RequestHandlerInterface
 {
     private const TEMPLATE_PATH = __DIR__ . '/../../view/';
 
