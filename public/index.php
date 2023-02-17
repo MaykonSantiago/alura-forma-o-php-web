@@ -6,12 +6,13 @@ use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7Server\ServerRequestCreator;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-$routes = require_once __DIR__ . '/../config/routes.php';
-
 
 $dbPath = __DIR__ . '/../banco.sqlite';
 $pdo = new PDO("sqlite:$dbPath");
 $repository = new VideoRepository($pdo);
+
+$routes = require_once __DIR__ . '/../config/routes.php';
+$diContainer = require_once __DIR__ . '/../config/dependencies.php';
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];
 $path = $_SERVER['PATH_INFO'] ?? '/';
@@ -29,7 +30,7 @@ $key = "$httpMethod|$path";
 
 if (array_key_exists($key, $routes)) {
     $controllerClass = $routes[$key];
-    $controller = new $controllerClass($repository);
+    $controller =  $diContainer->get($controllerClass);
 } else {
     $controller = new Error404Controller();
 }
