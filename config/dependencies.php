@@ -1,5 +1,7 @@
 <?php
 
+use League\Plates\Engine;
+
 $builder = new \DI\ContainerBuilder();
 
 $builder->addDefinitions([
@@ -7,6 +9,10 @@ $builder->addDefinitions([
         $dbPath = __DIR__ . '/../banco.sqlite';
         return new PDO("sqlite:$dbPath");
     },
+    Engine::class => function () {
+        $templatePath = __DIR__ . '/../view';
+        return new Engine($templatePath);
+    }
 ]);
 
 /** @var \Psr\Container\ContainerInterface $container */

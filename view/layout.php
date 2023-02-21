@@ -15,7 +15,6 @@
 </head>
 
 <body>
-
     <!-- Cabecalho -->
     <header>
         <nav class="cabecalho">
@@ -26,7 +25,6 @@
                 <a href="/logout" class="cabecalho__sair">Sair</a>
             </div>
         </nav>
-
     </header>
 
     <?php if (isset($_SESSION['error_message'])) : ?>
@@ -35,3 +33,7 @@
             <?php unset($_SESSION['error_message']); ?>
         </h2>
     <?php endif; ?>
+    <?= $this->section('content'); ?>    
+</body>
+
+</html>

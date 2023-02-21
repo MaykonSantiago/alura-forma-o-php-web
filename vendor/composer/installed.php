@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'd435e809464bca792a24a77e4e02279d790fb39e',
+        'reference' => 'a35f8c77221bdcec025b1e3d1e70320963e54021',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'd435e809464bca792a24a77e4e02279d790fb39e',
+            'reference' => 'a35f8c77221bdcec025b1e3d1e70320963e54021',
             'dev_requirement' => false,
         ),
         'laravel/serializable-closure' => array(
@@ -26,6 +26,15 @@
             'install_path' => __DIR__ . '/../laravel/serializable-closure',
             'aliases' => array(),
             'reference' => 'f23fe9d4e95255dacee1bf3525e0810d1a1b0f37',
+            'dev_requirement' => false,
+        ),
+        'league/plates' => array(
+            'pretty_version' => 'v3.5.0',
+            'version' => '3.5.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../league/plates',
+            'aliases' => array(),
+            'reference' => 'a6a3238e46c6e19af7318fdc36bfbe49b0620231',
             'dev_requirement' => false,
         ),
         'nyholm/psr7' => array(

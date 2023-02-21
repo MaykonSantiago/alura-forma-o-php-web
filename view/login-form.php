@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . '/inicio-html.php'; ?>
+<?php $this->layout('layout'); ?>
 
         <nav class="cabecalho">
             <a class="logo" href="../index.html"></a>
@@ -32,5 +32,3 @@
         </form>
 
     </main>
-
-<?php require_once __DIR__ . '/fim-html.php'; ?>
